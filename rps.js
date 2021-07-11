@@ -22,22 +22,58 @@ function randomInt(max) {
 function playRound(playerSelection, computerSelection) {
     playerSelection.toLowerCase();
     if (playerSelection === computerSelection) {
-        return "It's a tie!";
+        return "It's a tie! Repeat the round.";
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "Congratulations, you win! Rock beats scissors.";
+        return "Nice, you win! Rock beats scissors.";
     } else if (playerSelection === "rock" && computerSelection === "paper") {
         return "Ouch, you lose! Paper beats rock.";
     } else if (playerSelection === "paper" && computerSelection === "rock") {
-        return "Congratulations, you win! Paper beats rock.";
+        return "Nice, you win! Paper beats rock.";
     } else if (playerSelection === "paper" && computerSelection === "scissors") {
         return "Ouch, you lose! Scissors beat paper.";
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        return "Congratulations, you win! Scissors beat paper.";
+        return "Nice, you win! Scissors beat paper.";
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
         return "Ouch, you lose! Rock beats scissors.";
     } else return "Hey, that's not one of the options! Please input rock, paper, or scissors."
 }
 
-const playerSelection = "rock";
-const computerSelection = computerPlay(); 
-console.log(playRound(playerSelection, computerSelection));
+
+//play a five round game of rock paper scissors
+//create point tracker for the player and the computer
+//create round tracker to track what round we are in
+//if player wins, add 1 point to the player tracker 
+//if computer wins, add 1 point to the computer tracker
+//after 5 rounds, compare the numbers 
+//if player number is higher than computer number, declare player the winner 
+//else declare the computer winner
+//either way display point values for each
+
+function game() {
+    let round = 1; 
+    let playerPoints = 0; 
+    let computerPoints = 0; 
+    while (round <= 5) { 
+        console.log("Round " + round);
+        let playerSelection = prompt("What's your selection? Rock, paper, or scissors?");
+        let computerSelection = computerPlay();
+        let roundResult = playRound(playerSelection, computerSelection);
+        console.log(roundResult);
+        if (roundResult === "Nice, you win! Rock beats scissors." || roundResult === "Nice, you win! Paper beats rock." || roundResult === "Nice, you win! Scissors beat paper.") {
+            playerPoints += 1;
+        } else if (roundResult === "Ouch, you lose! Paper beats rock." || roundResult === "Ouch, you lose! Scissors beat paper." || roundResult === "Ouch, you lose! Rock beats scissors.") {
+            computerPoints += 1; 
+        } else { playerPoints += 0; round--  
+        }
+        round++ 
+        console.log("Player Points " + playerPoints);
+        console.log("Computer Points " + computerPoints);
+        if (round === 6) {
+            if (playerPoints > computerPoints) {
+                console.log("That's a wrap. You beat the computer. Congratulations!"); 
+            } else console.log("That's a wrap. You lost to the computer. Better luck next time!");
+        }
+    }
+}
+
+game(); 
