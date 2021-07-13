@@ -18,25 +18,80 @@ function randomInt(max) {
 
 //create function that takes two parameters - one from user and one from computerPlay function
 //compare the parameters: if equal it's a tie, otherwise paper beats rock, rock beats scissors, scissors beats paper
+let tie = "It's a tie! Repeat the round."; 
+let rockWin = "Nice, you win! Rock beats scissors";
+let rockLose = "Ouch, you lose! Paper beats rock";
+let paperWin = "Nice, you win! Paper beats rock.";
+let paperLose = "Ouch, you lose! Scissors beat paper.";
+let scissorsWin = "Nice, you win! Scissors beat paper.";
+let scissorsLose = "Ouch, you lose! Rock beats scissors.";
+
+let txtContainer = document.querySelector("#txt-container");
+let resultsParagraph = document.createElement("p");
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection.toLowerCase();
     if (playerSelection === computerSelection) {
-        return "It's a tie! Repeat the round.";
+        resultsParagraph.textContent = tie;
+        txtContainer.appendChild(resultsParagraph);
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "Nice, you win! Rock beats scissors.";
+        resultsParagraph.textContent = rockWin;
+        txtContainer.appendChild(resultsParagraph);
     } else if (playerSelection === "rock" && computerSelection === "paper") {
-        return "Ouch, you lose! Paper beats rock.";
+        resultsParagraph.textContent = rockLose;
+        txtContainer.appendChild(resultsParagraph);
     } else if (playerSelection === "paper" && computerSelection === "rock") {
-        return "Nice, you win! Paper beats rock.";
+        resultsParagraph.textContent = paperWin;
+        txtContainer.appendChild(resultsParagraph);
     } else if (playerSelection === "paper" && computerSelection === "scissors") {
-        return "Ouch, you lose! Scissors beat paper.";
+        resultsParagraph.textContent = paperLose;
+        txtContainer.appendChild(resultsParagraph);
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        return "Nice, you win! Scissors beat paper.";
+        resultsParagraph.textContent = scissorsWin;
+        txtContainer.appendChild(resultsParagraph);
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
-        return "Ouch, you lose! Rock beats scissors.";
-    } else return "Hey, that's not one of the options! Please input rock, paper, or scissors."
+        resultsParagraph.textContent = scissorsLose;
+        txtContainer.appendChild(resultsParagraph);
+    } 
 }
+
+const rock = document.querySelector("#rock-btn");
+const paper = document.querySelector("#paper-btn");
+const scissors = document.querySelector("#scissors-btn");
+let playerSelection = "";
+
+rock.addEventListener("click", () => { 
+   playerSelection = "rock";
+   game();
+});
+
+paper.addEventListener("click", () => { 
+    playerSection = "paper";
+    game(); 
+});
+
+scissors.addEventListener("click", () => { 
+    playerSelection = "scissors";
+    game(); 
+});
+
+function game() { 
+    let computerSelection = computerPlay();
+    let roundResult = playRound(playerSelection, computerSelection);
+    console.log(playerSelection);
+    console.log(computerSelection);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //play a five round game of rock paper scissors
@@ -48,7 +103,7 @@ function playRound(playerSelection, computerSelection) {
 //if player number is higher than computer number, declare player the winner 
 //else declare the computer winner
 //either way display point values for each
-
+/*
 function game() {
     let round = 1; 
     let playerPoints = 0; 
@@ -75,5 +130,4 @@ function game() {
         }
     }
 }
-
-game(); 
+*/
