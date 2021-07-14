@@ -113,11 +113,15 @@ function game() {
         if (playerPoints > computerPoints) {
                 resultsParagraph.textContent = win;
                 txtContainer.appendChild(resultsParagraph); 
-                round = 0; 
+                round = 1; 
+                playerPoints = 0; 
+                computerPoints = 0; 
         } else { 
                 resultsParagraph.textContent = lose; 
                 txtContainer.appendChild(resultsParagraph);
-                round = 0; 
+                round = 1; 
+                playerPoints = 0; 
+                computerPoints = 0; 
         }
     }    
 };
