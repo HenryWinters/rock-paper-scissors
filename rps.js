@@ -25,6 +25,8 @@ let paperWin = "Nice, you win! Paper beats rock.";
 let paperLose = "Ouch, you lose! Scissors beat paper.";
 let scissorsWin = "Nice, you win! Scissors beat paper.";
 let scissorsLose = "Ouch, you lose! Rock beats scissors.";
+let win = "That's a wrap. You have won against the computer. Congratulations!"; 
+let lose = "That's a wrap. You have lost to the computer. Better luck next time!";
 
 let txtContainer = document.querySelector("#txt-container");
 let resultsParagraph = document.createElement("p");
@@ -33,55 +35,92 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         resultsParagraph.textContent = tie;
         txtContainer.appendChild(resultsParagraph);
+        return tie; 
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
         resultsParagraph.textContent = rockWin;
         txtContainer.appendChild(resultsParagraph);
+        return rockWin; 
     } else if (playerSelection === "rock" && computerSelection === "paper") {
         resultsParagraph.textContent = rockLose;
         txtContainer.appendChild(resultsParagraph);
+        return rockLose; 
     } else if (playerSelection === "paper" && computerSelection === "rock") {
         resultsParagraph.textContent = paperWin;
         txtContainer.appendChild(resultsParagraph);
+        return paperWin; 
     } else if (playerSelection === "paper" && computerSelection === "scissors") {
         resultsParagraph.textContent = paperLose;
         txtContainer.appendChild(resultsParagraph);
+        return paperLose; 
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
         resultsParagraph.textContent = scissorsWin;
         txtContainer.appendChild(resultsParagraph);
+        return scissorsWin;
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
         resultsParagraph.textContent = scissorsLose;
         txtContainer.appendChild(resultsParagraph);
+        return scissorsLose; 
     } 
 }
 
 const rock = document.querySelector("#rock-btn");
 const paper = document.querySelector("#paper-btn");
 const scissors = document.querySelector("#scissors-btn");
-let playerSelection = "";
 
 rock.addEventListener("click", () => { 
-   playerSelection = "rock";
-   game();
+    playerSelection = "rock";
+    game();
+});
+ 
+ paper.addEventListener("click", () => { 
+     playerSelection = "paper";
+     game();
+});
+ 
+ scissors.addEventListener("click", () => { 
+     playerSelection = "scissors";
+     game();
 });
 
-paper.addEventListener("click", () => { 
-    playerSection = "paper";
-    game(); 
-});
 
-scissors.addEventListener("click", () => { 
-    playerSelection = "scissors";
-    game(); 
-});
+let pointsContainer = document.querySelector("#points-container");
+let playerPointsParagraph = document.createElement("p");
+let computerPointsParagraph = document.createElement("p");
+let roundParagraph = document.createElement("p");
+const start = document.querySelector("#start-btn");
+let computerPoints = 0; 
+let playerPoints = 0; 
+let round = 1; 
 
-function game() { 
+function game() {
+    roundParagraph.textContent = "Round: " + round;
+    pointsContainer.appendChild(roundParagraph);  
     let computerSelection = computerPlay();
     let roundResult = playRound(playerSelection, computerSelection);
-    console.log(playerSelection);
-    console.log(computerSelection);
-}
-
-
+    if (roundResult === rockWin || roundResult === paperWin || roundResult === scissorsWin) { 
+            playerPoints += 1; 
+    } else if (roundResult === rockLose || roundResult === paperLose || roundResult === scissorsLose) {
+            computerPoints += 1; 
+    } else { 
+            playerPoints += 0; round--
+    }
+    computerPointsParagraph.textContent = "Computer Points: " + computerPoints; 
+    playerPointsParagraph.textContent = "Player Points: " + playerPoints; 
+    pointsContainer.appendChild(playerPointsParagraph);
+    pointsContainer.appendChild(computerPointsParagraph);
+    round++;
+    if (round === 6) {
+        if (playerPoints > computerPoints) {
+                resultsParagraph.textContent = win;
+                txtContainer.appendChild(resultsParagraph); 
+                round = 0; 
+        } else { 
+                resultsParagraph.textContent = lose; 
+                txtContainer.appendChild(resultsParagraph);
+                round = 0; 
+        }
+    }    
+};
 
 
 
