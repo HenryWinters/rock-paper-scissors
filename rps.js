@@ -83,18 +83,19 @@ rock.addEventListener("click", () => {
 });
 
 
-let pointsContainer = document.querySelector("#points-container");
+let playerPointsContainer = document.querySelector("#player-points-container");
+let computerPointsContainer = document.querySelector("#computer-points-container");
+let roundContainer = document.querySelector("#round-container");
 let playerPointsParagraph = document.createElement("p");
 let computerPointsParagraph = document.createElement("p");
 let roundParagraph = document.createElement("p");
-const start = document.querySelector("#start-btn");
 let computerPoints = 0; 
 let playerPoints = 0; 
 let round = 1; 
 
 function game() {
-    roundParagraph.textContent = "Round: " + round;
-    pointsContainer.appendChild(roundParagraph);  
+    roundParagraph.textContent = round;
+    roundContainer.appendChild(roundParagraph);  
     let computerSelection = computerPlay();
     let roundResult = playRound(playerSelection, computerSelection);
     if (roundResult === rockWin || roundResult === paperWin || roundResult === scissorsWin) { 
@@ -102,12 +103,13 @@ function game() {
     } else if (roundResult === rockLose || roundResult === paperLose || roundResult === scissorsLose) {
             computerPoints += 1; 
     } else { 
-            playerPoints += 0; round--
+            playerPoints += 0; 
+            round--;
     }
-    computerPointsParagraph.textContent = "Computer Points: " + computerPoints; 
-    playerPointsParagraph.textContent = "Player Points: " + playerPoints; 
-    pointsContainer.appendChild(playerPointsParagraph);
-    pointsContainer.appendChild(computerPointsParagraph);
+    computerPointsParagraph.textContent = computerPoints; 
+    playerPointsParagraph.textContent = playerPoints; 
+    playerPointsContainer.appendChild(playerPointsParagraph);
+    computerPointsContainer.appendChild(computerPointsParagraph);
     round++;
     if (round === 6) {
         if (playerPoints > computerPoints) {
