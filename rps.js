@@ -82,22 +82,38 @@ rock.addEventListener("click", () => {
      game();
 });
 
-
 let playerPointsContainer = document.querySelector("#player-points-container");
 let computerPointsContainer = document.querySelector("#computer-points-container");
 let roundContainer = document.querySelector("#round-container");
+let playerSelectionDisplay = document.querySelector("#player-selection-display");
+let computerSelectionDisplay = document.querySelector("#computer-selection-display");
 let playerPointsParagraph = document.createElement("p");
 let computerPointsParagraph = document.createElement("p");
 let roundParagraph = document.createElement("p");
+let playerSelectionDisplayIcon = document.createElement("i");
+let computerSelectionDisplayIcon = document.createElement("i");
 let computerPoints = 0; 
 let playerPoints = 0; 
 let round = 1; 
 
 function game() {
     roundParagraph.textContent = round;
-    roundContainer.appendChild(roundParagraph);  
+    roundContainer.appendChild(roundParagraph); 
+    
     let computerSelection = computerPlay();
     let roundResult = playRound(playerSelection, computerSelection);
+
+    selectPlayerIcon(); 
+
+    if (computerSelection === "rock") {
+        computerSelectionDisplayIcon.className = "fas fa-hand-rock fa-7x";
+    } else if (computerSelection === "paper") {
+        computerSelectionDisplayIcon.className = "fas fa-hand-paper fa-7x"; 
+    } else {
+        computerSelectionDisplayIcon.className = "fas fa-hand-scissors fa-7x"; 
+    }
+    computerSelectionDisplay.appendChild(computerSelectionDisplayIcon);
+
     if (roundResult === rockWin || roundResult === paperWin || roundResult === scissorsWin) { 
             playerPoints += 1; 
     } else if (roundResult === rockLose || roundResult === paperLose || roundResult === scissorsLose) {
@@ -130,8 +146,16 @@ function game() {
 
 
 
-
-
+function selectPlayerIcon() { 
+    if (playerSelection === "rock") {
+        playerSelectionDisplayIcon.className = "fas fa-hand-rock fa-7x";
+    } else if (playerSelection === "paper") {
+        playerSelectionDisplayIcon.className = "fas fa-hand-paper fa-7x"; 
+    } else {
+        playerSelectionDisplayIcon.className = "fas fa-hand-scissors fa-7x"; 
+    }
+    playerSelectionDisplay.appendChild(playerSelectionDisplayIcon);
+};
 
 
 

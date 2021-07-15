@@ -1,0 +1,12 @@
+#rock-btn, #paper-btn, #scissors-btn { 
+    width: 150px; 
+    height: 150px; 
+}
+
+button { 
+    box-shadow: 0.5 0.5x 0.5px 0.5px darkgray; 
+}
+
+button:hover { 
+    background-color: darkgrey; 
+}
