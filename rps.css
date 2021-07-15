@@ -1,6 +1,22 @@
+html { 
+    font-family: 'Roboto', sans-serif;
+}
+
+header { 
+    text-align: center; 
+}
+
+#btn-container { 
+    display: flex; 
+    width: 100%; 
+    justify-content: center; 
+}
+
 #rock-btn, #paper-btn, #scissors-btn { 
     width: 150px; 
     height: 150px; 
+    margin-left: 5px; 
+    margin-right: 5px; 
 }
 
 button { 
@@ -9,4 +25,20 @@ button {
 
 button:hover { 
     background-color: darkgrey; 
+}
+
+#txt-container, #round-container, #computer-points-container, #player-points-container { 
+    font-size: 2em; 
+    display: flex; 
+}
+
+#selection-display-container { 
+    display: flex; 
+    justify-content: center; 
+}
+
+#player-selection-display, #computer-selection-display { 
+    margin-right: 15px; 
+    margin-left: 15px; 
+    margin-top: 25px; 
 }
