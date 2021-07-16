@@ -18,14 +18,14 @@ function randomInt(max) {
 
 //create function that takes two parameters - one from user and one from computerPlay function
 //compare the parameters: if equal it's a tie, otherwise paper beats rock, rock beats scissors, scissors beats paper
-let tie = "It's a tie! Repeat the round."; 
+let tie = "It's a tie!"; 
 let rockWin = "Nice, you win! Rock beats scissors";
 let rockLose = "Ouch, you lose! Paper beats rock";
 let paperWin = "Nice, you win! Paper beats rock.";
 let paperLose = "Ouch, you lose! Scissors beat paper.";
 let scissorsWin = "Nice, you win! Scissors beat paper.";
 let scissorsLose = "Ouch, you lose! Rock beats scissors.";
-let win = "That's a wrap. You have won against the computer. Congratulations!"; 
+let win = "That's a wrap. You have beat the computer. Congratulations!"; 
 let lose = "That's a wrap. You have lost to the computer. Better luck next time!";
 
 let txtContainer = document.querySelector("#txt-container");
@@ -84,21 +84,16 @@ rock.addEventListener("click", () => {
 
 let playerPointsContainer = document.querySelector("#player-points-container");
 let computerPointsContainer = document.querySelector("#computer-points-container");
-let roundContainer = document.querySelector("#round-container");
 let playerSelectionDisplay = document.querySelector("#player-selection-display");
 let computerSelectionDisplay = document.querySelector("#computer-selection-display");
 let playerPointsParagraph = document.createElement("p");
 let computerPointsParagraph = document.createElement("p");
-let roundParagraph = document.createElement("p");
 let playerSelectionDisplayIcon = document.createElement("i");
 let computerSelectionDisplayIcon = document.createElement("i");
 let computerPoints = 0; 
 let playerPoints = 0; 
-let round = 1; 
 
 function game() {
-    roundParagraph.textContent = round;
-    roundContainer.appendChild(roundParagraph); 
     
     let computerSelection = computerPlay();
     let roundResult = playRound(playerSelection, computerSelection);
@@ -113,31 +108,35 @@ function game() {
         computerSelectionDisplayIcon.className = "fas fa-hand-scissors fa-7x"; 
     }
     computerSelectionDisplay.appendChild(computerSelectionDisplayIcon);
+    playerSelectionDisplayIcon.style.color = "black";
+    computerSelectionDisplayIcon.style.color = "black";
 
     if (roundResult === rockWin || roundResult === paperWin || roundResult === scissorsWin) { 
             playerPoints += 1; 
+            playerSelectionDisplayIcon.style.color = "green";
     } else if (roundResult === rockLose || roundResult === paperLose || roundResult === scissorsLose) {
             computerPoints += 1; 
+            computerSelectionDisplayIcon.style.color = "red";
     } else { 
             playerPoints += 0; 
-            round--;
+            playerSelectionDisplayIcon.style.color = "blue";
+            computerSelectionDisplayIcon.style.color = "blue";
     }
+
     computerPointsParagraph.textContent = computerPoints; 
     playerPointsParagraph.textContent = playerPoints; 
     playerPointsContainer.appendChild(playerPointsParagraph);
     computerPointsContainer.appendChild(computerPointsParagraph);
-    round++;
-    if (round === 6) {
+    
+    if (playerPoints === 5 || computerPoints === 5) {
         if (playerPoints > computerPoints) {
                 resultsParagraph.textContent = win;
                 txtContainer.appendChild(resultsParagraph); 
-                round = 1; 
                 playerPoints = 0; 
                 computerPoints = 0; 
         } else { 
                 resultsParagraph.textContent = lose; 
                 txtContainer.appendChild(resultsParagraph);
-                round = 1; 
                 playerPoints = 0; 
                 computerPoints = 0; 
         }

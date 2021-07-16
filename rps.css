@@ -3,6 +3,7 @@ html {
 }
 
 header { 
+    width: 100%;
     text-align: center; 
 }
 
@@ -32,13 +33,39 @@ button:hover {
     display: flex; 
 }
 
-#selection-display-container { 
+#game-feed-container { 
+    width: 100%; 
+    display: flex; 
+    justify-content: space-around; 
+}
+
+#selection-display-container {
+    display: flex; 
+}
+
+#player-selection-display, #computer-selection-display { 
+    margin-top: 25px; 
+    margin-right: 30px; 
+    margin-left: 30px; 
+}
+
+
+#player-points-container, #computer-points-container {
+    display: flex; 
+    flex-direction: column; 
+    text-align: center; 
+}
+
+#player-points-container p, #computer-points-container p { 
+    margin-bottom: 0px; 
+}
+
+#txt-container {
+    width: 100%; 
     display: flex; 
     justify-content: center; 
 }
 
-#player-selection-display, #computer-selection-display { 
-    margin-right: 15px; 
-    margin-left: 15px; 
-    margin-top: 25px; 
+#color-red { 
+    color: red; 
 }
